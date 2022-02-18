@@ -24,7 +24,7 @@ class VideoDownload:
             if not os.path.exists(dsl):
                 os.mkdir(dsl)
             filepath = os.path.join(dsl, txt + '.mp4')
-            print("存储路径--+" + filepath + "下载的地址excDownlaod---url=" + downloadurl)
+            print("存储路径--" + filepath + ":" + "下载的地址excDownlaodurl--" + downloadurl)
             reponse = urllib.request.urlopen(url=downloadurl)
             # decode()做用是将响应中字节(byte)类型的数据值转成字符串类型
             # data = reponse.read().decode()

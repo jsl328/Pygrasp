@@ -1,3 +1,5 @@
+import time
+
 from selenium import webdriver
 from videoDownload import VideoDownload
 
@@ -35,6 +37,7 @@ class BusinessEnglish:
         for busin in range(len(business)):
             if business[self.businessindex]:
                 self.driver.get(business[self.businessindex])
+                time.sleep(2)
                 js_title = self.driver.find_element_by_id('js_video_page_title')
                 print("business js_title = " + js_title.text)
                 js_video_parent = self.driver.find_element_by_tag_name("video")
@@ -46,6 +49,7 @@ class BusinessEnglish:
                 print("business DownloadResponseInfo", res.msg)
                 self.driver.quit()
                 self.businessindex += 1
+            time.sleep(3)
             self.businessEnglishExe()
         self.driver.close()
         self.driver = None

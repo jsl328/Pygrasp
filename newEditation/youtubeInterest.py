@@ -1,3 +1,4 @@
+import time
 
 from selenium import webdriver
 from videoDownload import VideoDownload
@@ -42,7 +43,7 @@ class YoutubeInterest:
     def __init__(self):
         """初始化引擎"""
         self.driver = webdriver.Chrome(executable_path="/Users/mac/Downloads/chromedriver-3")
-        self.youindex = 0
+        self.youindex = 11
         pass
 
     def youtubeInterestExec(self):
@@ -50,8 +51,9 @@ class YoutubeInterest:
         if self.youindex > lens:
             return
         for youtub in range(len(youtubeRsts)):
-            if youtubeRsts[youtub]:
-                self.driver.get(youtubeRsts[youtub])
+            if youtubeRsts[self.youindex]:
+                self.driver.get(youtubeRsts[self.youindex])
+                time.sleep(2)
                 js_title = self.driver.find_element_by_id('js_video_page_title')
                 print("youtubeInterest js_title = " + js_title.text)
                 js_video_parent = self.driver.find_element_by_class_name("video_fill")
@@ -60,8 +62,10 @@ class YoutubeInterest:
                 src = js_video_parent.get_attribute("src")
                 res = VideoDownload().excDownlaod(js_title.text, src, "youtube")
                 print("youtubeInterestExec DownloadResponseInfo", res.msg)
-                self.driver.quit()
                 self.youindex += 1
+                self.driver.quit()
+                # self.driver.back()
+            time.sleep(3)
             self.youtubeInterestExec()
         self.driver.close()
         self.driver = None
